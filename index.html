@@ -1,3 +1,19 @@
+    <script>
+      // Auto-scroll iframe into view on mobile browsers
+      document.addEventListener('DOMContentLoaded', function() {
+        function isMobile() {
+          return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+        if (isMobile()) {
+          var iframeDiv = document.querySelector('iframe');
+          if (iframeDiv) {
+            setTimeout(function() {
+              iframeDiv.scrollIntoView({behavior: 'smooth', block: 'start'});
+            }, 500);
+          }
+        }
+      });
+    </script>
 <!doctype html>
 <html lang="en">
   <head>
@@ -129,9 +145,35 @@
         </script>
 
           <!-- Office Forms iframe embedded below main boxes -->
-          <div style="text-align:center;">
-            <iframe width="100%" height="950px" src="https://forms.office.com/Pages/ResponsePage.aspx?id=j8bV-mnRc0O-11UkO9mce83JcY9Tmj9Nk2Be37kh_XdUNTBMOUlZOVQ3OEJOSEc2TlEyUEZUNkVBSS4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; width:100%; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen></iframe>
+          <div id="form-iframe-container" style="text-align:center;">
+            <!-- Tap to open button removed -->
+            <iframe id="formIframe"
+              width="100%"
+              height="950px"
+              src="https://forms.office.com/Pages/ResponsePage.aspx?id=j8bV-mnRc0O-11UkO9mce83JcY9Tmj9Nk2Be37kh_XdUNTBMOUlZOVQ3OEJOSEc2TlEyUEZUNkVBSS4u&embed=true"
+              frameborder="0"
+              marginwidth="0"
+              marginheight="0"
+              style="border:none;width:100%;max-width:100%;max-height:100vh;min-height:80dvh;display:block;"
+              allow="microphone; camera; autoplay; clipboard-read; clipboard-write; fullscreen"
+              allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen
+            ></iframe>
+            <div id="formFallback" style="display:none;margin-top:18px;">
+              <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=j8bV-mnRc0O-11UkO9mce83JcY9Tmj9Nk2Be37kh_XdUNTBMOUlZOVQ3OEJOSEc2TlEyUEZUNkVBSS4u" target="_blank" rel="noopener" style="font-size:18px;color:#3b82f6;text-decoration:underline;">Open the form in a new tab</a>
+            </div>
           </div>
+          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              var iframe = document.getElementById('formIframe');
+              var fallback = document.getElementById('formFallback');
+              // Always show iframe on all devices
+              iframe.style.display = 'block';
+              // Fallback: if iframe fails to load, show fallback link
+              iframe.addEventListener('error', function() {
+                fallback.style.display = 'block';
+              });
+            });
+          </script>
 
           <div class="fields" style="margin-top:24px">
             <div class="field">
