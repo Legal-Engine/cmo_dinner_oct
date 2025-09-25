@@ -39,38 +39,6 @@
       .partner small{color:var(--muted)}
       .le-logo{height:28px;max-width:180px;object-fit:contain;display:block}
 
-      /* Responsive iframe container */
-      .iframe-responsive {
-        position: relative;
-        width: 100%;
-        padding-bottom: 65vh;
-        height: 0;
-        overflow: visible;
-        margin-bottom: 18px;
-      }
-      .iframe-responsive iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border: none;
-        min-height: 400px;
-        background: #fff;
-      }
-      @media (max-width: 600px) {
-        .iframe-responsive {
-          padding-bottom: 80dvh;
-          min-height: 80dvh;
-          height: auto;
-        }
-        .iframe-responsive iframe {
-          min-height: 80dvh;
-          position: static;
-          height: 80dvh;
-        }
-      }
-
       @media (max-width:800px){
         .fields{grid-template-columns:1fr}
       }
@@ -161,54 +129,9 @@
         </script>
 
           <!-- Office Forms iframe embedded below main boxes -->
-          <div class="iframe-responsive" id="iframe-container">
-            <button id="show-iframe-btn" style="display:none;width:100%;padding:18px 0;font-size:18px;font-weight:700;background:#3b82f6;color:#fff;border:none;border-radius:10px;">Tap to open RSVP form</button>
-            <iframe 
-              src="https://forms.office.com/Pages/ResponsePage.aspx?id=j8bV-mnRc0O-11UkO9mce83JcY9Tmj9Nk2Be37kh_XdUNTBMOUlZOVQ3OEJOSEc2TlEyUEZUNkVBSS4u&embed=true"
-              frameborder="0"
-              allow="microphone; camera; autoplay; clipboard-read; clipboard-write; fullscreen"
-              allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen
-              id="le-form-iframe"
-              title="Legal Engine Dinner RSVP Form"
-              style="display:block;"
-            ></iframe>
-            <div id="iframe-fallback" style="display:none; text-align:center; margin-top:12px;">
-              <p style="color:#e11d48; font-weight:600;">If the form does not appear, <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=j8bV-mnRc0O-11UkO9mce83JcY9Tmj9Nk2Be37kh_XdUNTBMOUlZOVQ3OEJOSEc2TlEyUEZUNkVBSS4u" target="_blank" rel="noopener" style="color:#2563eb; text-decoration:underline;">tap here to open the RSVP form in a new tab</a>.</p>
-            </div>
+          <div style="text-align:center;">
+            <iframe width="100%" height="950px" src="https://forms.office.com/Pages/ResponsePage.aspx?id=j8bV-mnRc0O-11UkO9mce83JcY9Tmj9Nk2Be37kh_XdUNTBMOUlZOVQ3OEJOSEc2TlEyUEZUNkVBSS4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; width:100%; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen></iframe>
           </div>
-    <script>
-      // Mobile: require tap to reveal iframe, allow/fallback logic
-      document.addEventListener('DOMContentLoaded', function() {
-        var isMobile = /iPhone|iPad|iPod|Android|Mobile|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        var iframe = document.getElementById('le-form-iframe');
-        var fallback = document.getElementById('iframe-fallback');
-        var btn = document.getElementById('show-iframe-btn');
-        var container = document.getElementById('iframe-container');
-        var loaded = false;
-        if (isMobile && iframe && btn) {
-          iframe.style.display = 'none';
-          btn.style.display = 'block';
-          btn.addEventListener('click', function() {
-            btn.style.display = 'none';
-            iframe.style.display = 'block';
-            // Try to focus the iframe for user gesture
-            setTimeout(function(){
-              try { iframe.contentWindow.focus(); } catch(e){}
-            }, 100);
-          });
-        }
-        // Fallback if iframe fails to load
-        if (iframe) {
-          setTimeout(function() {
-            if (!loaded) fallback.style.display = 'block';
-          }, 3500);
-          iframe.onload = function() {
-            loaded = true;
-            fallback.style.display = 'none';
-          };
-        }
-      });
-    </script>
 
           <div class="fields" style="margin-top:24px">
             <div class="field">
